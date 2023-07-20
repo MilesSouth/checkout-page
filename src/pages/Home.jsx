@@ -2,7 +2,7 @@ import Holiday from "../components/Holiday"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { BASE_URL } from "../data/BASE_URL"
-
+import AddHoliday from "../components/AddHoliday"
 const Home = () => {
   const [holidays, setHolidays] = useState([])
 
@@ -21,8 +21,16 @@ const Home = () => {
 
   return (
     <div>
+      <AddHoliday holidays={holidays} setHolidays={setHolidays} />
       {holidays?.map((item) => {
-        return <Holiday holiday={item} />
+        return (
+          <Holiday
+            key={item.id}
+            holiday={item}
+            holidays={holidays}
+            setHolidays={setHolidays}
+          />
+        )
       })}
     </div>
   )

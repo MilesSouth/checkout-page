@@ -1,14 +1,18 @@
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai"
 import { useState } from "react"
 
-const Holiday = ({ holiday }) => {
+const Holiday = ({ holiday, holidays, setHolidays }) => {
   const [productCount, setProductCount] = useState(1)
 
   const decrease = () => {
-    productCount > 1 ? setProductCount(productCount - 1) : productCount
+    productCount > 1 && setProductCount(productCount - 1)
   }
   const increase = () => {
     setProductCount(productCount + 1)
+  }
+
+  const removeHoliday = () => {
+    setHolidays(holidays.filter((item) => item.id !== holiday.id))
   }
 
   return (
@@ -37,8 +41,15 @@ const Holiday = ({ holiday }) => {
             <AiOutlinePlus />
           </button>
         </div>
-        <button className="btn btn-danger">Remove</button>
-        <span>Product Total: </span>
+        <button
+          className="btn btn-danger"
+          onClick={() => {
+            removeHoliday()
+          }}
+        >
+          Remove
+        </button>
+        <span>Product Total: {holiday.price * productCount}</span>
       </div>
     </div>
   )
